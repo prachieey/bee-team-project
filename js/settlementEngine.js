@@ -216,14 +216,22 @@ function runSettlement() {
     const expenses = loadExpenses();
 
     // No expenses yet
-    if (expenses.length === 0) {
+// No expenses yet
+if (expenses.length === 0) {
 
-        displaySettlements([]);
+    const container = document.getElementById(
+        "settlement-list"
+    );
 
-        console.log("No expenses found.");
-
-        return;
+    if (container) {
+        container.innerHTML =
+            "<p>No expenses available yet.</p>";
     }
+
+    console.log("No expenses found.");
+
+    return;
+}
 
     const members = getMembers(expenses);
 
