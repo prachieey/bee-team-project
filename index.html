@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="SettleUp – Personal Finance Dashboard. Track your income, expenses, and balance at a glance." />
+    <title>SettleUp – Dashboard</title>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+    <!-- ─── Header ─────────────────────────────────────── -->
+    <header>
+        <span class="logo">SettleUp</span>
+        <nav>
+            <a href="index.html" class="active">Dashboard</a>
+            <a href="expenses.html">Transactions</a>
+        </nav>
+    </header>
+
+    <!-- ─── Main Content ───────────────────────────────── -->
+    <main class="container">
+        <h1 class="page-title">My Dashboard</h1>
+
+        <!-- Summary Cards -->
+        <section class="summary-grid" aria-label="Financial summary">
+
+            <div class="summary-card income">
+                <p class="card-label">Total Income</p>
+                <p class="card-value" id="total-income">₹0.00</p>
+            </div>
+
+            <div class="summary-card expense">
+                <p class="card-label">Total Expense</p>
+                <p class="card-value" id="total-expense">₹0.00</p>
+            </div>
+
+            <div class="summary-card balance">
+                <p class="card-label">Balance</p>
+                <p class="card-value" id="balance">₹0.00</p>
+                <span class="status-badge" id="balance-status">Zero Balance</span>
+            </div>
+
+        </section>
+
+        <!-- Two-column layout for breakdown + recent -->
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:1.5rem;">
+
+            <!-- Category-wise Expense Breakdown -->
+            <section class="section-card" aria-label="Category breakdown">
+                <h2>Expense by Category</h2>
+                <div id="category-breakdown">
+                    <p class="empty-msg">No expense categories yet.</p>
+                </div>
+            </section>
+
+            <!-- Recent Transactions -->
+            <section class="section-card" aria-label="Recent transactions">
+                <h2>Recent Transactions</h2>
+                <div id="recent-transactions">
+                    <p class="empty-msg">No transactions yet. <a href="expenses.html">Add one!</a></p>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- ─── Scripts ────────────────────────────────────── -->
+    <!-- storage.js must load first (dashboard.js uses loadData) -->
+    <script src="js/storage.js"></script>
+    <script src="js/dashboard.js"></script>
+
+</body>
+</html>
