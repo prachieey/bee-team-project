@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Group Expense Split</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .member {
+            margin: 8px 0;
+        }
+
+        .member input {
+            width: auto;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .custom-member {
+            margin: 10px 0;
+        }
+
+        .custom-member input {
+            width: 150px;
+        }
+
+        #customSection {
+            display: none;
+        }
+
+        #result {
+            margin-top: 30px;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+        }
+
+        .error {
+            color: red;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Group Expense Split</h1>
+
+    <!-- Expense Name -->
+    <div class="form-group">
+        <label for="expenseName">Expense Name</label>
+
+        <input
+            type="text"
+            id="expenseName"
+            placeholder="Example: Dinner"
+        >
+    </div>
+
+
+    <!-- Amount -->
+    <div class="form-group">
+        <label for="amount">Amount</label>
+
+        <input
+            type="number"
+            id="amount"
+            placeholder="Example: 1200"
+            min="1"
+        >
+    </div>
+
+
+    <!-- Members -->
+    <div class="form-group">
+
+        <label>Select Members</label>
+
+        <div class="member">
+            <input
+                type="checkbox"
+                class="member-checkbox"
+                value="prachi"
+                id="prachi"
+            >
+
+            <label for="prachi">
+                Prachi
+            </label>
+        </div>
+
+
+        <div class="member">
+            <input
+                type="checkbox"
+                class="member-checkbox"
+                value="rishab"
+                id="rishab"
+            >
+
+            <label for="rishab">
+                Rishab
+            </label>
+        </div>
+
+
+        <div class="member">
+            <input
+                type="checkbox"
+                class="member-checkbox"
+                value="sanchita"
+                id="sanchita"
+            >
+
+            <label for="sanchita">
+                Sanchita
+            </label>
+        </div>
+
+    </div>
+
+
+    <!-- Split Type -->
+    <div class="form-group">
+
+        <label>Split Type</label>
+
+        <label>
+            <input
+                type="radio"
+                name="splitType"
+                value="equal"
+                checked
+            >
+
+            Equal Split
+        </label>
+
+
+        <label>
+            <input
+                type="radio"
+                name="splitType"
+                value="custom"
+            >
+
+            Custom Split
+        </label>
+
+    </div>
+
+
+    <!-- Custom Split -->
+    <div id="customSection">
+
+        <h3>Enter Custom Shares</h3>
+
+        <div id="customMembers"></div>
+
+    </div>
+
+
+    <!-- Calculate Button -->
+    <button id="calculateButton">
+        Calculate Split
+    </button>
+
+
+    <!-- Error -->
+    <div id="errorMessage" class="error"></div>
+
+
+    <!-- Result -->
+    <div id="result">
+
+        <h2>Result</h2>
+
+        <div id="resultContent">
+            No calculation yet.
+        </div>
+
+    </div>
+
+
+    <!-- IMPORTANT:
+         splitEngine.js MUST come first.
+         groupExpense.js uses its functions.
+    -->
+
+    <script src="js/splitEngine.js"></script>
+    <script src="js/group_Expense.js"></script>
+
+</body>
+
+</html>

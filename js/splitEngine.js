@@ -57,3 +57,5 @@ function splitCustom(amount, shareMap) {
         })
     );
 }
+window.splitEqually = splitEqually;
+window.splitCustom = splitCustom;
