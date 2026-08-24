@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="SettleUp – Manage personal and group expenses in one dashboard.">
+
+    <title>SettleUp – Dashboard</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* ==============================
+           DASHBOARD EXTRA STYLES
+           ============================== */
+
+        .dashboard-section {
+            margin-top: 2rem;
+        }
+
+        .section-card h2 {
+            margin-bottom: 1.5rem;
+        }
+
+        .member-input-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .member-input-row input {
+            flex: 1;
+        }
+
+        .member-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .member-tag {
+            padding: 7px 12px;
+            border-radius: 20px;
+            background: #334155;
+            color: #f1f5f9;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .member-tag button {
+            border: none;
+            background: transparent;
+            color: #ef4444;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .group-member {
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .group-member input {
+            width: auto;
+        }
+
+        .custom-member {
+            margin: 12px 0;
+        }
+
+        .custom-member input {
+            margin-top: 5px;
+        }
+
+        #customSection {
+            display: none;
+        }
+
+        .result-box {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            background: #1e293b;
+        }
+
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #334155;
+        }
+
+        .result-row:last-child {
+            border-bottom: none;
+        }
+
+        .error-message {
+            color: #ef4444;
+            margin-top: 10px;
+        }
+
+        .success-message {
+            color: #22c55e;
+            margin-top: 10px;
+        }
+
+        .current-user-box {
+            display: flex;
+            gap: 10px;
+            align-items: end;
+        }
+
+        .current-user-box .form-group {
+            flex: 1;
+        }
+
+        .transaction-actions {
+            margin-top: 10px;
+        }
+
+        .anchor-button {
+            text-decoration: none;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ==============================
+         HEADER
+         ============================== -->
+
+    <header>
+        <span class="logo">SettleUp</span>
+
+        <nav>
+            <a href="#dashboard" class="active">Dashboard</a>
+            <a href="#add-transaction">Transactions</a>
+            <a href="#group-expense">Group Expense</a>
+            <a href="#settlement">Settlement</a>
+        </nav>
+    </header>
+
+
+    <!-- ==============================
+         MAIN DASHBOARD
+         ============================== -->
+
+    <main class="container" id="dashboard">
+
+        <h1 class="page-title">My Dashboard</h1>
+
+
+        <!-- ==============================
+             CURRENT USER
+             ============================== -->
+
+        <section class="section-card dashboard-section">
+
+            <h2>My Profile</h2>
+
+            <div class="current-user-box">
+
+                <div class="form-group">
+
+                    <label for="current-user">
+                        Your Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="current-user"
+                        placeholder="Enter your name"
+                    >
+
+                </div>
+
+                <button
+                    type="button"
+                    id="save-user-btn"
+                    class="btn-primary"
+                >
+                    Save Name
+                </button>
+
+            </div>
+
+            <p id="user-message"></p>
+
+        </section>
+
+
+        <!-- ==============================
+             SUMMARY
+             ============================== -->
+
+        <section
+            class="summary-grid dashboard-section"
+            aria-label="Financial summary"
+        >
+
+            <div class="summary-card income">
+
+                <p class="card-label">
+                    Total Income
+                </p>
+
+                <p
+                    class="card-value"
+                    id="total-income"
+                >
+                    ₹0.00
+                </p>
+
+            </div>
+
+
+            <div class="summary-card expense">
+
+                <p class="card-label">
+                    My Expenses
+                </p>
+
+                <p
+                    class="card-value"
+                    id="total-expense"
+                >
+                    ₹0.00
+                </p>
+
+            </div>
+
+
+            <div class="summary-card balance">
+
+                <p class="card-label">
+                    My Balance
+                </p>
+
+                <p
+                    class="card-value"
+                    id="balance"
+                >
+                    ₹0.00
+                </p>
+
+                <span
+                    class="status-badge"
+                    id="balance-status"
+                >
+                    Zero Balance
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==============================
+             ADD NORMAL TRANSACTION
+             ============================== -->
+
+        <section
+            class="section-card dashboard-section"
+            id="add-transaction"
+        >
+
+            <h2>Add Transaction</h2>
+
+            <form id="txn-form" novalidate>
+
+                <div class="form-grid">
+
+                    <!-- Type -->
+
+                    <div class="form-group">
+
+                        <label for="txn-type">
+                            Type
+                        </label>
+
+                        <select
+                            id="txn-type"
+                            name="txn-type"
+                        >
+
+                            <option value="income">
+                                Income
+                            </option>
+
+                            <option value="expense">
+                                Expense
+                            </option>
+
+                        </select>
+
+                        <span
+                            class="field-error"
+                            id="error-type"
+                        ></span>
+
+                    </div>
+
+
+                    <!-- Amount -->
+
+                    <div class="form-group">
+
+                        <label for="txn-amount">
+                            Amount (₹)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="txn-amount"
+                            name="txn-amount"
+                            placeholder="e.g. 500"
+                            min="0.01"
+                            step="0.01"
+                        >
+
+                        <span
+                            class="field-error"
+                            id="error-amount"
+                        ></span>
+
+                    </div>
+
+
+                    <!-- Category -->
+
+                    <div class="form-group">
+
+                        <label for="txn-category">
+                            Category
+                        </label>
+
+                        <select
+                            id="txn-category"
+                            name="txn-category"
+                        ></select>
+
+                        <span
+                            class="field-error"
+                            id="error-category"
+                        ></span>
+
+                    </div>
+
+
+                    <!-- Date -->
+
+                    <div class="form-group">
+
+                        <label for="txn-date">
+                            Date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="txn-date"
+                            name="txn-date"
+                        >
+
+                        <span
+                            class="field-error"
+                            id="error-date"
+                        ></span>
+
+                    </div>
+
+
+                    <!-- Description -->
+
+                    <div
+                        class="form-group"
+                        style="grid-column: 1 / -1;"
+                    >
+
+                        <label for="txn-description">
+                            Description
+                        </label>
+
+                        <textarea
+                            id="txn-description"
+                            name="txn-description"
+                            placeholder="e.g. Grocery shopping"
+                            rows="2"
+                        ></textarea>
+
+                        <span
+                            class="field-error"
+                            id="error-description"
+                        ></span>
+
+                    </div>
+
+                </div>
+
+
+                <div id="form-error" role="alert"></div>
+
+
+                <div class="form-actions">
+
+                    <button
+                        type="submit"
+                        id="submit-btn"
+                        class="btn-primary"
+                    >
+                        Add Transaction
+                    </button>
+
+                    <button
+                        type="button"
+                        id="cancel-edit-btn"
+                        class="btn-secondary"
+                        style="display:none;"
+                    >
+                        Cancel
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+
+        <!-- ==============================
+             GROUP EXPENSE
+             ============================== -->
+
+        <section
+            class="section-card dashboard-section"
+            id="group-expense"
+        >
+
+            <h2>Group Expense</h2>
+
+            <p>
+                Split an expense with any number of people.
+            </p>
+
+
+            <!-- Expense Name -->
+
+            <div class="form-group">
+
+                <label for="expenseName">
+                    Expense Name
+                </label>
+
+                <input
+                    type="text"
+                    id="expenseName"
+                    placeholder="Example: Dinner"
+                >
+
+            </div>
+
+
+            <!-- Amount -->
+
+            <div class="form-group">
+
+                <label for="amount">
+                    Total Amount (₹)
+                </label>
+
+                <input
+                    type="number"
+                    id="amount"
+                    placeholder="Example: 1200"
+                    min="0.01"
+                    step="0.01"
+                >
+
+            </div>
+
+
+            <!-- ==============================
+                 ADD MEMBERS
+                 ============================== -->
+
+            <div class="form-group">
+
+                <label>
+                    Group Members
+                </label>
+
+                <div class="member-input-row">
+
+                    <input
+                        type="text"
+                        id="new-member"
+                        placeholder="Enter member name"
+                    >
+
+                    <button
+                        type="button"
+                        id="add-member-btn"
+                        class="btn-secondary"
+                    >
+                        Add Member
+                    </button>
+
+                </div>
+
+                <div
+                    id="member-list"
+                    class="member-list"
+                ></div>
+
+            </div>
+
+
+            <!-- ==============================
+                 SELECT MEMBERS
+                 ============================== -->
+
+            <div class="form-group">
+
+                <label>
+                    Select Members In This Expense
+                </label>
+
+                <div id="group-members"></div>
+
+            </div>
+
+
+            <!-- ==============================
+                 SPLIT TYPE
+                 ============================== -->
+
+            <div class="form-group">
+
+                <label>
+                    Split Type
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="splitType"
+                        value="equal"
+                        checked
+                    >
+                    Equal Split
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="splitType"
+                        value="custom"
+                    >
+                    Custom Split
+                </label>
+
+            </div>
+
+
+            <!-- ==============================
+                 CUSTOM SPLIT
+                 ============================== -->
+
+            <div id="customSection">
+
+                <h3>
+                    Enter Custom Shares
+                </h3>
+
+                <div id="customMembers"></div>
+
+            </div>
+
+
+            <!-- Calculate -->
+
+            <button
+                type="button"
+                id="calculateButton"
+                class="btn-primary"
+            >
+                Calculate & Save Group Expense
+            </button>
+
+
+            <div
+                id="errorMessage"
+                class="error-message"
+            ></div>
+
+
+            <div
+                id="successMessage"
+                class="success-message"
+            ></div>
+
+
+            <!-- Result -->
+
+            <div
+                id="result"
+                class="result-box"
+            >
+
+                <h3>
+                    Split Result
+                </h3>
+
+                <div id="resultContent">
+                    No calculation yet.
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==============================
+             SETTLEMENT
+             ============================== -->
+
+        <section
+            class="section-card dashboard-section"
+            id="settlement"
+        >
+
+            <h2>
+                Settlement
+            </h2>
+
+            <p style="color:#94a3b8; margin-bottom:15px;">
+                Demo group ("Goa Trip" — Prachi, Rishab, Sanchita, Piyanshi)
+                showing net balances and the minimum set of payments needed
+                to settle everyone up.
+            </p>
+
+            <div
+                id="balances-result"
+                class="result-box"
+            >
+
+                <h3>Net Balances</h3>
+
+                <div id="balances-list">
+                    Loading...
+                </div>
+
+            </div>
+
+            <button
+                type="button"
+                id="runSettlementButton"
+                class="btn-primary"
+                style="margin-top:15px;"
+            >
+                Run Settlement
+            </button>
+
+            <div
+                id="settlement-box"
+                class="result-box"
+            >
+
+                <h3>Who Pays Whom</h3>
+
+                <div id="settlement-result">
+                    Click "Run Settlement" to calculate.
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==============================
+             MY GROUP EXPENSES — EDIT / DELETE
+             Built by Rishab
+             ============================== -->
+
+        <section
+            class="section-card dashboard-section"
+            id="my-group-expenses"
+        >
+
+            <h2>My Group Expenses</h2>
+
+            <p style="color:#94a3b8; margin-bottom:15px;">
+                Edit or delete a group expense. Editing re-splits the
+                amount across the selected members.
+            </p>
+
+            <div id="group-expense-list" class="result-box">
+                Loading...
+            </div>
+
+            <!-- Edit form (hidden until Edit is clicked) -->
+            <div id="ge-edit-form" class="result-box" style="display:none; margin-top:15px;">
+
+                <h3>Edit Group Expense</h3>
+
+                <div class="form-group">
+                    <label for="ge-edit-name">Expense name</label>
+                    <input type="text" id="ge-edit-name" placeholder="e.g. Dinner">
+                </div>
+
+                <div class="form-group">
+                    <label for="ge-edit-amount">Total amount (₹)</label>
+                    <input type="number" id="ge-edit-amount" min="0" step="0.01">
+                </div>
+
+                <div class="form-group">
+                    <label>Split type</label>
+                    <label><input type="radio" name="ge-splitType" value="equal" checked> Equal</label>
+                    <label><input type="radio" name="ge-splitType" value="custom"> Custom</label>
+                </div>
+
+                <div class="form-group">
+                    <label>Members</label>
+                    <div id="ge-edit-members"></div>
+                </div>
+
+                <div id="ge-edit-custom-section" style="display:none;">
+                    <label>Custom shares</label>
+                    <div id="ge-edit-custom-members"></div>
+                </div>
+
+                <button type="button" id="ge-save-edit-btn" class="btn-primary">Save Changes</button>
+                <button type="button" id="ge-cancel-edit-btn" class="btn-primary" style="background:#475569;">Cancel</button>
+
+                <div id="ge-edit-error" class="error-message"></div>
+                <div id="ge-edit-success" class="success-message"></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==============================
+             CATEGORY + RECENT
+             ============================== -->
+
+        <div
+            class="dashboard-section"
+            style="
+                display:grid;
+                grid-template-columns:repeat(
+                    auto-fit,
+                    minmax(300px, 1fr)
+                );
+                gap:1.5rem;
+            "
+        >
+
+            <!-- Category -->
+
+            <section
+                class="section-card"
+                aria-label="Category breakdown"
+            >
+
+                <h2>
+                    My Expenses by Category
+                </h2>
+
+                <div id="category-breakdown">
+
+                    <p class="empty-msg">
+                        No expense categories yet.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- Recent -->
+
+            <section
+                class="section-card"
+                aria-label="Recent transactions"
+            >
+
+                <h2>
+                    Recent Transactions
+                </h2>
+
+                <div id="recent-transactions">
+
+                    <p class="empty-msg">
+                        No transactions yet.
+                    </p>
+
+                </div>
+
+            </section>
+
+        </div>
+
+
+        <!-- ==============================
+             ALL MY TRANSACTIONS
+             ============================== -->
+
+        <section
+            class="section-card dashboard-section"
+            id="transactions"
+        >
+
+            <h2>
+                My Transactions
+            </h2>
+
+            <div id="transaction-list">
+
+                <p class="empty-msg">
+                    No transactions found.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ==============================
+         SCRIPTS
+         ============================== -->
+
+    <script src="js/storage.js"></script>
+    <script src="js/splitEngine.js"></script>
+    <script src="js/expenses.js"></script>
+    <script src="js/group_expense.js"></script>
+    <script src="js/settlementEngine.js"></script>
+    <script src="js/groupExpenseEdit.js"></script>
+    <script src="js/dashboard.js"></script>
+
+</body>
+
+</html>
