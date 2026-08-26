@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="SettleUp – Manage your personal transactions. Add, edit, and delete income and expense entries." />
+    <title>SettleUp – Transactions</title>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+    <!-- ─── Header ─────────────────────────────────────── -->
+    <header>
+        <span class="logo">SettleUp</span>
+        <nav>
+            <a href="index.html">Dashboard</a>
+            <a href="expenses.html" class="active">Transactions</a>
+        </nav>
+    </header>
+
+    <!-- ─── Main Content ───────────────────────────────── -->
+    <main class="container">
+
+        <!-- ── Add / Edit Transaction Form ─────────────── -->
+        <section class="section-card" aria-label="Transaction form">
+            <h2 id="form-title">Add Transaction</h2>
+
+            <form id="txn-form" novalidate>
+
+                <div class="form-grid">
+
+                    <!-- Transaction Type -->
+                    <div class="form-group">
+                        <label for="txn-type">Type</label>
+                        <select id="txn-type" name="txn-type">
+                            <option value="income">Income</option>
+                            <option value="expense">Expense</option>
+                        </select>
+                        <span class="field-error" id="error-type"></span>
+                    </div>
+
+                    <!-- Amount -->
+                    <div class="form-group">
+                        <label for="txn-amount">Amount (₹)</label>
+                        <input type="number" id="txn-amount" name="txn-amount" placeholder="e.g. 500" min="0.01"
+                            step="0.01" />
+                        <span class="field-error" id="error-amount"></span>
+                    </div>
+
+                    <!-- Category -->
+                    <div class="form-group">
+                        <label for="txn-category">Category</label>
+                        <select id="txn-category" name="txn-category">
+                            <!-- Filled dynamically by expenses.js -->
+                        </select>
+                        <span class="field-error" id="error-category"></span>
+                    </div>
+
+                    <!-- Date -->
+                    <div class="form-group">
+                        <label for="txn-date">Date</label>
+                        <input type="date" id="txn-date" name="txn-date" />
+                        <span class="field-error" id="error-date"></span>
+                    </div>
+
+                    <!-- Description – spans full width on wider screens -->
+                    <div class="form-group" style="grid-column: 1 / -1;">
+                        <label for="txn-description">Description</label>
+                        <textarea id="txn-description" name="txn-description"
+                            placeholder="e.g. Grocery shopping at D-Mart" rows="2"></textarea>
+                        <span class="field-error" id="error-description"></span>
+                    </div>
+
+                </div><!-- /.form-grid -->
+
+                <!-- Validation error message box -->
+                <div id="form-error" role="alert"></div>
+
+                <!-- Submit & Cancel buttons -->
+                <div class="form-actions">
+                    <button type="submit" id="submit-btn" class="btn-primary">Add Transaction</button>
+                    <button type="button" id="cancel-edit-btn" class="btn-secondary"
+                        style="display:none;">Cancel</button>
+                </div>
+
+            </form>
+        </section><!-- /.section-card (form) -->
+
+        <!-- ── Transaction List ─────────────────────────── -->
+        <section class="section-card" aria-label="Transaction list">
+            <h2>All Transactions</h2>
+            <div id="transaction-list">
+                <p class="empty-msg">No transactions found. Add one above!</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ─── Scripts ────────────────────────────────────── -->
+    <!-- storage.js must load first (expenses.js uses loadData / saveData) -->
+    <script src="js/storage.js"></script>
+    <script src="js/expenses.js"></script>
+
+</body>
+
+</html>

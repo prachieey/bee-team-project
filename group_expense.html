@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Group Expense Split</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .member {
+            margin: 8px 0;
+        }
+
+        .member input {
+            width: auto;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .custom-member {
+            margin: 10px 0;
+        }
+
+        .custom-member input {
+            width: 150px;
+        }
+
+        #customSection {
+            display: none;
+        }
+
+        #result {
+            margin-top: 30px;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+        }
+
+        .error {
+            color: red;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <span class="logo">SettleUp</span>
+        <nav>
+            <a href="index.html">Dashboard</a>
+            <a href="expenses.html">Transactions</a>
+            <a href="group_expense.html" class="active">Group Expense</a>
+            <a href="settlement.html">Settlement</a>
+        </nav>
+    </header>
+
+    <h1>Group Expense Split</h1>
+
+    <!-- Expense Name -->
+    <div class="form-group">
+        <label for="expenseName">Expense Name</label>
+
+        <input
+            type="text"
+            id="expenseName"
+            placeholder="Example: Dinner"
+        >
+    </div>
+
+
+    <!-- Amount -->
+    <div class="form-group">
+        <label for="amount">Amount</label>
+
+        <input
+            type="number"
+            id="amount"
+            placeholder="Example: 1200"
+            min="1"
+        >
+    </div>
+
+
+    <!-- Members -->
+    <div class="form-group">
+
+        <label>Select Members</label>
+
+        <div class="member">
+            <input
+                type="checkbox"
+                class="member-checkbox"
+                value="prachi"
+                id="prachi"
+            >
+
+            <label for="prachi">
+                Prachi
+            </label>
+        </div>
+
+
+        <div class="member">
+            <input
+                type="checkbox"
+                class="member-checkbox"
+                value="rishab"
+                id="rishab"
+            >
+
+            <label for="rishab">
+                Rishab
+            </label>
+        </div>
+
+
+        <div class="member">
+            <input
+                type="checkbox"
+                class="member-checkbox"
+                value="sanchita"
+                id="sanchita"
+            >
+
+            <label for="sanchita">
+                Sanchita
+            </label>
+        </div>
+
+    </div>
+
+
+    <!-- Split Type -->
+    <div class="form-group">
+
+        <label>Split Type</label>
+
+        <label>
+            <input
+                type="radio"
+                name="splitType"
+                value="equal"
+                checked
+            >
+
+            Equal Split
+        </label>
+
+
+        <label>
+            <input
+                type="radio"
+                name="splitType"
+                value="custom"
+            >
+
+            Custom Split
+        </label>
+
+    </div>
+
+
+    <!-- Custom Split -->
+    <div id="customSection">
+
+        <h3>Enter Custom Shares</h3>
+
+        <div id="customMembers"></div>
+
+    </div>
+
+
+    <!-- Calculate Button -->
+    <button id="calculateButton">
+        Calculate Split
+    </button>
+
+
+    <!-- Error -->
+    <div id="errorMessage" class="error"></div>
+    <div id="successMessage" style="color: #22c55e;"></div>
+
+
+    <!-- Result -->
+    <div id="result">
+
+        <h2>Result</h2>
+
+        <div id="resultContent">
+            No calculation yet.
+        </div>
+
+    </div>
+
+
+    <!-- ==============================
+         MY GROUP EXPENSES — EDIT / DELETE
+         Built by Rishab
+         ============================== -->
+    <section id="my-group-expenses">
+
+        <h2>My Group Expenses</h2>
+        <p>Edit or delete a group expense. Editing re-splits the amount across the selected members.</p>
+
+        <div id="group-expense-list" class="result">
+            Loading...
+        </div>
+
+        <div id="ge-edit-form" class="result" style="display:none; margin-top:15px;">
+
+            <h3>Edit Group Expense</h3>
+
+            <div class="form-group">
+                <label for="ge-edit-name">Expense name</label>
+                <input type="text" id="ge-edit-name" placeholder="e.g. Dinner">
+            </div>
+
+            <div class="form-group">
+                <label for="ge-edit-amount">Total amount (₹)</label>
+                <input type="number" id="ge-edit-amount" min="0" step="0.01">
+            </div>
+
+            <div class="form-group">
+                <label>Split type</label>
+                <label><input type="radio" name="ge-splitType" value="equal" checked> Equal</label>
+                <label><input type="radio" name="ge-splitType" value="custom"> Custom</label>
+            </div>
+
+            <div class="form-group">
+                <label>Members</label>
+                <div id="ge-edit-members"></div>
+            </div>
+
+            <div id="ge-edit-custom-section" style="display:none;">
+                <label>Custom shares</label>
+                <div id="ge-edit-custom-members"></div>
+            </div>
+
+            <button type="button" id="ge-save-edit-btn">Save Changes</button>
+            <button type="button" id="ge-cancel-edit-btn">Cancel</button>
+
+            <div id="ge-edit-error" class="error"></div>
+            <div id="ge-edit-success"></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- IMPORTANT:
+         storage.js and profile.js MUST come before group_expense.js —
+         it uses saveData()/loadData() and getCurrentUser().
+         splitEngine.js MUST come first.
+         groupExpense.js uses its functions.
+    -->
+
+    <script src="js/storage.js"></script>
+    <script src="js/profile.js"></script>
+    <script src="js/splitEngine.js"></script>
+    <script src="js/group_expense.js"></script>
+    <script src="js/groupExpenseEdit.js"></script>
+
+</body>
+
+</html>
