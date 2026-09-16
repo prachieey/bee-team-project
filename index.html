@@ -15,12 +15,25 @@
         <nav>
             <a href="index.html" class="active">Dashboard</a>
             <a href="expenses.html">Transactions</a>
+            <a href="group_expense.html">Group Expense</a>
+            <a href="settlement.html">Settlement</a>
         </nav>
     </header>
 
     <!-- ─── Main Content ───────────────────────────────── -->
     <main class="container">
         <h1 class="page-title">My Dashboard</h1>
+
+        <!-- My Profile — required by group_expense.js's getCurrentUser() -->
+        <section class="section-card" aria-label="My profile">
+            <h2>My Profile</h2>
+            <div class="form-group">
+                <label for="profile-name">Your Name</label>
+                <input type="text" id="profile-name" placeholder="Enter your name">
+                <button id="profile-save-btn" class="btn-primary">Save Name</button>
+            </div>
+            <p id="profile-status" style="color:#94a3b8;"></p>
+        </section>
 
         <!-- Summary Cards -->
         <section class="summary-grid" aria-label="Financial summary">
@@ -68,6 +81,7 @@
     <!-- ─── Scripts ────────────────────────────────────── -->
     <!-- storage.js must load first (dashboard.js uses loadData) -->
     <script src="js/storage.js"></script>
+    <script src="js/profile.js"></script>
     <script src="js/dashboard.js"></script>
 
 </body>
