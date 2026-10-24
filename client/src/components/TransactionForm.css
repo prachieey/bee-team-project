@@ -1,0 +1,74 @@
+/* src/components/TransactionForm.css */
+.premium-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.type-toggle-container {
+  display: flex;
+  gap: 0.5rem;
+  background: var(--bg-input);
+  padding: 0.3rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  width: fit-content;
+  margin-bottom: 0.5rem;
+}
+
+.type-toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 1.15rem;
+  border-radius: 6px;
+  border: none;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: transparent;
+  color: var(--text-secondary);
+  transition: all 0.18s ease;
+}
+
+.type-toggle-btn.income.active {
+  background: var(--income-green);
+  color: #032014;
+  box-shadow: 0 2px 8px var(--income-border);
+}
+
+.type-toggle-btn.expense.active {
+  background: var(--expense-red);
+  color: #ffffff;
+  box-shadow: 0 2px 8px var(--expense-border);
+}
+
+.input-with-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-prefix {
+  position: absolute;
+  left: 0.85rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.input-with-icon input,
+.input-with-icon select {
+  width: 100%;
+  padding-left: 2.35rem;
+}
+
+.input-with-icon input.has-error,
+.input-with-icon select.has-error {
+  border-color: var(--expense-red);
+  box-shadow: 0 0 0 2px rgba(244, 63, 94, 0.2);
+}

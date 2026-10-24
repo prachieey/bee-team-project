@@ -1,0 +1,217 @@
+/* src/components/SplitCalculator.css */
+.split-calculator-box {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  background: rgba(14, 21, 36, 0.45);
+  padding: 1.35rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+}
+
+.split-type-segmented {
+  display: flex;
+  background: var(--bg-input);
+  padding: 0.3rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  width: fit-content;
+}
+
+.split-segment-btn {
+  padding: 0.45rem 1.25rem;
+  border-radius: 6px;
+  border: none;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: transparent;
+  color: var(--text-secondary);
+  transition: all 0.18s ease;
+}
+
+.split-segment-btn.active {
+  background: var(--bg-surface-elevated);
+  color: var(--text-primary);
+  border: 1px solid var(--border-light);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.member-selection-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.member-selection-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.section-label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.equal-summary-pill {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--income-green);
+  background: var(--income-bg);
+  border: 1px solid var(--income-border);
+  padding: 0.2rem 0.65rem;
+  border-radius: var(--radius-full);
+}
+
+.member-checkbox-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.65rem;
+}
+
+.member-check-item {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: var(--bg-surface);
+  padding: 0.65rem 0.85rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.member-check-item:hover {
+  border-color: var(--border-light);
+}
+
+.member-check-item.selected {
+  border-color: var(--accent);
+  background: rgba(16, 185, 129, 0.05);
+}
+
+.member-info-col {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.member-name {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.member-share-hint {
+  font-size: 0.76rem;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* Custom Shares Panel */
+.custom-shares-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding-top: 1rem;
+  border-top: 1px dashed var(--border);
+}
+
+.custom-shares-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.custom-share-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: var(--bg-surface);
+  padding: 0.6rem 0.95rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+}
+
+.custom-share-member {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.share-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.currency-prefix {
+  position: absolute;
+  left: 0.65rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  pointer-events: none;
+}
+
+.share-input-wrapper input {
+  width: 125px;
+  padding: 0.45rem 0.65rem 0.45rem 1.6rem;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  color: var(--text-primary);
+  font-size: 0.92rem;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  outline: none;
+}
+
+.share-input-wrapper input:focus {
+  border-color: var(--accent);
+}
+
+.custom-validation-card {
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  margin-top: 0.25rem;
+}
+
+.custom-validation-card.valid {
+  background: var(--income-bg);
+  border: 1px solid var(--income-border);
+  color: #a7f3d0;
+}
+
+.custom-validation-card.invalid {
+  background: var(--expense-bg);
+  border: 1px solid var(--expense-border);
+  color: #fecdd3;
+}
+
+.validation-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.validation-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-weight: 600;
+  font-size: 0.82rem;
+}

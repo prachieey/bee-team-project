@@ -1,0 +1,133 @@
+/* src/components/SummaryCard.css */
+.summary-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.75rem;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.summary-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-light);
+  box-shadow: var(--shadow-lg);
+}
+
+.summary-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.summary-card-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.summary-card-title {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.summary-card-sub {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+}
+
+.summary-card-icon-badge {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.icon-income {
+  background: var(--income-bg);
+  color: var(--income-green);
+  border: 1px solid var(--income-border);
+}
+
+.icon-expense {
+  background: var(--expense-bg);
+  color: var(--expense-red);
+  border: 1px solid var(--expense-border);
+}
+
+.icon-balance {
+  background: var(--accent-light);
+  color: var(--accent);
+  border: 1px solid var(--accent-border);
+}
+
+.icon-neutral {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+
+.summary-card-amount {
+  font-size: 1.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+  margin: 0.25rem 0;
+}
+
+.card-income .summary-card-amount {
+  color: var(--income-green);
+}
+
+.card-expense .summary-card-amount {
+  color: var(--expense-red);
+}
+
+.summary-card-footer {
+  display: flex;
+  align-items: center;
+  margin-top: 0.25rem;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-full);
+}
+
+.status-positive {
+  background: var(--income-bg);
+  color: var(--income-green);
+  border: 1px solid var(--income-border);
+}
+
+.status-negative {
+  background: var(--expense-bg);
+  color: var(--expense-red);
+  border: 1px solid var(--expense-border);
+}
+
+.status-neutral {
+  background: rgba(148, 163, 184, 0.1);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}

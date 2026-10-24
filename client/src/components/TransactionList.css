@@ -1,0 +1,66 @@
+/* src/components/TransactionList.css */
+.transactions-table {
+  width: 100%;
+}
+
+.col-date {
+  white-space: nowrap;
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+}
+
+.category-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cell-icon-bubble {
+  width: 24px;
+  height: 24px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.category-text {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.desc-text {
+  max-width: 280px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  color: var(--text-secondary);
+}
+
+.amount-value {
+  font-weight: 700;
+  font-size: 0.96rem;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.amount-income {
+  color: var(--income-green);
+}
+
+.amount-expense {
+  color: var(--expense-red);
+}
+
+.actions-cluster {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  justify-content: flex-end;
+}

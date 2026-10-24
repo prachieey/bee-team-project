@@ -1,0 +1,226 @@
+/* src/components/FinanceChart.css */
+.finance-chart-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.finance-chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.finance-chart-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.015em;
+}
+
+.finance-chart-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-top: 0.2rem;
+}
+
+.chart-legend {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+}
+
+.income-dot {
+  background: var(--income-green);
+  box-shadow: 0 0 8px var(--income-border);
+}
+
+.expense-dot {
+  background: var(--expense-red);
+  box-shadow: 0 0 8px var(--expense-border);
+}
+
+.chart-empty-state {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  background: rgba(14, 21, 36, 0.4);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+}
+
+.chart-empty-hint {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-top: 0.35rem;
+}
+
+.chart-bars-wrapper {
+  position: relative;
+  height: 220px;
+  width: 100%;
+  padding-top: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.chart-grid-lines {
+  position: absolute;
+  inset: 1.5rem 0 2rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.grid-line {
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.chart-columns {
+  position: absolute;
+  inset: 0 0 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.chart-col {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+  cursor: pointer;
+  padding-bottom: 2rem;
+}
+
+.bars-pair {
+  width: 100%;
+  max-width: 32px;
+  height: calc(100% - 2rem);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 3px;
+}
+
+.bar {
+  flex: 1;
+  border-radius: 4px 4px 1px 1px;
+  transition: height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease, transform 0.2s ease;
+  min-height: 2px;
+}
+
+.bar-income {
+  background: linear-gradient(180deg, #10b981 0%, rgba(16, 185, 129, 0.5) 100%);
+}
+
+.bar-expense {
+  background: linear-gradient(180deg, #f43f5e 0%, rgba(244, 63, 94, 0.5) 100%);
+}
+
+.chart-col:hover .bar {
+  transform: scaleY(1.03);
+  filter: brightness(1.15);
+}
+
+.col-label {
+  position: absolute;
+  bottom: 0;
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  transition: color 0.15s ease;
+}
+
+.chart-col:hover .col-label,
+.chart-col.active .col-label {
+  color: var(--text-primary);
+}
+
+/* Tooltip */
+.chart-tooltip {
+  position: absolute;
+  bottom: calc(100% - 1.5rem);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 0.65rem 0.85rem;
+  box-shadow: var(--shadow-lg);
+  z-index: 20;
+  white-space: nowrap;
+  pointer-events: none;
+  animation: tooltipFade 0.15s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+@keyframes tooltipFade {
+  from { opacity: 0; transform: translate(-50%, 4px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+.tooltip-month {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.25rem;
+  margin-bottom: 0.2rem;
+}
+
+.tooltip-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.8rem;
+}
+
+.text-income {
+  color: var(--income-green);
+}
+
+.text-expense {
+  color: var(--expense-red);
+}
+
+.text-net {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .chart-bars-wrapper {
+    overflow-x: auto;
+  }
+  .chart-columns {
+    min-width: 480px;
+  }
+}

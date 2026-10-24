@@ -1,0 +1,215 @@
+/* src/pages/GroupDetails.css */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+  transition: color 0.15s ease;
+}
+
+.back-link:hover {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.members-bar-card {
+  padding: 1.15rem 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.members-bar-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.members-bar-label {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.members-pills-list {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.member-avatar-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border);
+  padding: 0.25rem 0.65rem 0.25rem 0.35rem;
+  border-radius: var(--radius-full);
+}
+
+.chip-name {
+  font-size: 0.84rem;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.chip-you {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* Expenses List */
+.group-expenses-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.expense-item-card {
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.35rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: border-color 0.18s ease;
+}
+
+.expense-item-card:hover {
+  border-color: var(--border-light);
+}
+
+.expense-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.expense-item-left {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.expense-icon-badge {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  background: var(--accent-light);
+  border: 1px solid var(--accent-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.expense-item-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.015em;
+  margin: 0;
+}
+
+.expense-item-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  margin-top: 0.25rem;
+  flex-wrap: wrap;
+}
+
+.meta-bullet {
+  color: var(--text-muted);
+}
+
+.split-type-badge {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  padding: 0.1rem 0.45rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  text-transform: capitalize;
+}
+
+.expense-item-amount-col {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.expense-total-amount {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.expense-your-share {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* Participants Tray */
+.expense-participants-tray {
+  background: rgba(8, 12, 20, 0.5);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.tray-label {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.tray-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.participant-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.84rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+}
+
+.chip-member-name {
+  color: var(--text-secondary);
+}
+
+.chip-share-amount {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.expense-item-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
