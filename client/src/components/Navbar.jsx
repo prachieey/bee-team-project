@@ -24,7 +24,7 @@ function Navbar({ onToast }) {
   const handleLogout = async () => {
     await logout();
     navigate('/login', { replace: true });
-    onToast?.('Logged out successfully.', 'info');
+    onToast?.('See you soon!', 'info');
   };
 
   const closeMobileMenu = () => {
@@ -117,7 +117,7 @@ function Navbar({ onToast }) {
             aria-label="Logout"
           >
             <LogOut size={16} />
-            <span className="logout-text">Logout</span>
+            <span className="logout-text">Log out</span>
           </button>
 
           {/* Mobile Menu Hamburger Button */}
@@ -151,7 +151,7 @@ function Navbar({ onToast }) {
             onClick={closeMobileMenu}
           >
             <ReceiptText size={18} />
-            <span>Personal Transactions</span>
+            <span>Your money diary</span>
           </NavLink>
 
           <NavLink
@@ -160,7 +160,7 @@ function Navbar({ onToast }) {
             onClick={closeMobileMenu}
           >
             <Users2 size={18} />
-            <span>Expense Groups</span>
+            <span>Your people</span>
           </NavLink>
 
           <NavLink
@@ -169,7 +169,7 @@ function Navbar({ onToast }) {
             onClick={closeMobileMenu}
           >
             <Scale size={18} />
-            <span>Settlement Engine</span>
+            <span>Settle up</span>
           </NavLink>
 
           <NavLink
@@ -178,7 +178,7 @@ function Navbar({ onToast }) {
             onClick={closeMobileMenu}
           >
             <UserCircle2 size={18} />
-            <span>Account Profile</span>
+            <span>You</span>
           </NavLink>
 
           <div className="mobile-drawer-footer">

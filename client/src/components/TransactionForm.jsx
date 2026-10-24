@@ -108,7 +108,7 @@ function TransactionForm({
           onClick={() => handleTypeToggle('expense')}
         >
           <TrendingDown size={16} />
-          <span>Expense</span>
+          <span>Spend</span>
         </button>
         <button
           type="button"
@@ -116,14 +116,14 @@ function TransactionForm({
           onClick={() => handleTypeToggle('income')}
         >
           <TrendingUp size={16} />
-          <span>Income</span>
+          <span>Money in</span>
         </button>
       </div>
 
       <div className="form-grid">
         {/* Amount Input with Currency Symbol */}
         <div className="form-group">
-          <label htmlFor="txn-amount">Amount (₹)</label>
+          <label htmlFor="txn-amount">How much?</label>
           <div className="input-with-icon">
             <span className="input-prefix">₹</span>
             <input
@@ -196,7 +196,7 @@ function TransactionForm({
 
         {/* Description Input */}
         <div className="form-group">
-          <label htmlFor="txn-desc">Description (Optional)</label>
+          <label htmlFor="txn-desc">A note (optional)</label>
           <div className="input-with-icon">
             <span className="input-prefix">
               <FileText size={15} />
@@ -214,7 +214,7 @@ function TransactionForm({
 
       <div className="form-actions">
         <button type="submit" className="btn-primary" disabled={isSubmitting}>
-          {isSubmitting ? 'Saving…' : initialData ? 'Update Transaction' : 'Save Transaction'}
+          {isSubmitting ? 'Saving…' : initialData ? 'Update entry' : 'Save it'}
         </button>
         {onCancel && (
           <button type="button" className="btn-secondary" onClick={onCancel}>

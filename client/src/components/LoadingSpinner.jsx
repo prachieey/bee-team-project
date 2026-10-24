@@ -7,6 +7,11 @@ function LoadingSpinner({ fullPage = false, size = 'md' }) {
   if (fullPage) {
     return (
       <div className="spinner-fullpage">
+        <div className="loading-skeleton-stack" aria-hidden="true">
+          <span className="loading-skeleton loading-skeleton-wide" />
+          <span className="loading-skeleton loading-skeleton-card" />
+          <span className="loading-skeleton loading-skeleton-card" />
+        </div>
         {spinner}
         <p className="spinner-text">Loading…</p>
       </div>

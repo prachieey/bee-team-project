@@ -64,3 +64,11 @@
   gap: 0.35rem;
   justify-content: flex-end;
 }
+.table-container { border: 0; background: transparent; }
+.transactions-table { border-collapse: separate; border-spacing: 0 .55rem; }
+.transactions-table th { background: transparent; color: var(--ink-faint); border: 0; }
+.transaction-row { background: var(--bg-soft); transition: transform .18s ease, box-shadow .18s ease; }
+.transaction-row:hover { transform: translateY(-2px); box-shadow: var(--shadow-soft); }
+.transaction-row td { border: 0; color: var(--ink); }
+.transaction-row td:first-child { border-radius: 16px 0 0 16px; }
+.transaction-row td:last-child { border-radius: 0 16px 16px 0; }
