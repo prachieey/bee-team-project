@@ -74,9 +74,9 @@ function Signup({ onToast }) {
             <Wallet size={16} />
             <span>SettleUp Finance</span>
           </div>
-          <h1 className="auth-title">Make money feel simpler</h1>
+          <h1 className="auth-title">Create Account</h1>
           <p className="auth-subtitle">
-            A softer way to track your own, together.
+            Get started with modern personal finance and effortless group splitting
           </p>
         </div>
 
@@ -181,7 +181,7 @@ function Signup({ onToast }) {
               <span>Creating account…</span>
             ) : (
               <>
-                <span>Join SettleUp</span>
+                <span>Create SettleUp Account</span>
                 <ArrowRight size={16} />
               </>
             )}
@@ -189,9 +189,9 @@ function Signup({ onToast }) {
         </form>
 
         <p className="auth-footer">
-          Already with us?{' '}
+          Already have an account?{' '}
           <Link to="/login" className="auth-link">
-            Good to see you again
+            Log in here
           </Link>
         </p>
       </div>

@@ -131,7 +131,7 @@
 
 .category-progress-fill {
   height: 100%;
-  background: var(--lilac);
+  background: linear-gradient(90deg, #10b981, #059669);
   border-radius: var(--radius-full);
   transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -231,20 +231,3 @@
 .amount-expense {
   color: var(--expense-red);
 }
-.dashboard-grid { gap: 1.5rem; }
-.summary-grid { gap: 1.25rem; }
-.chart-section-card { background: var(--lilac); }
-.finance-chart-title { color: var(--ink); font-family: var(--font-display); }
-.finance-chart-subtitle { color: rgba(27,26,23,.65); }
-.chart-bars-wrapper { background: rgba(255,255,255,.3); border-radius: 22px; }
-.bar-income { background: var(--green); border-radius: 10px 10px 4px 4px; }
-.bar-expense { background: var(--coral); border-radius: 10px 10px 4px 4px; }
-.category-progress-track { background: var(--surface-2); border-radius: 99px; }
-.category-progress-fill { background: var(--lilac); border-radius: inherit; }
-.recent-item { background: var(--bg-soft); border-radius: 18px; padding: .8rem; }
-.recent-icon-bubble { border: 0; }
-.recent-icon-bubble.income { background: var(--green-soft); color: var(--green); }
-.recent-icon-bubble.expense { background: var(--coral-soft); color: var(--coral); }
-.recent-item-category, .category-name { color: var(--ink); }
-.card-action-link { color: var(--green); }
-@media (min-width: 900px) { .summary-grid { grid-template-columns: 1.4fr 1fr 1fr; } .dashboard-grid { grid-template-columns: 1fr 1fr; } }

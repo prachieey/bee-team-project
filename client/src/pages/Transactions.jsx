@@ -14,7 +14,6 @@ import ConfirmModal from '../components/ConfirmModal';
 import LoadingSpinner from '../components/LoadingSpinner';
 import {
   PlusCircle,
-  TrendingUp,
   Search,
   Filter,
   ArrowUpDown,
@@ -139,36 +138,31 @@ function Transactions({ onToast }) {
       {/* Page Header */}
       <div className="page-header">
         <div>
-          <h1 className="page-title">Your money <em style={{ fontFamily: 'var(--font-serif)', fontWeight: 400 }}>diary</em></h1>
+          <h1 className="page-title">Personal Transactions</h1>
           <p className="page-subtitle">
-            Everything you've logged, in one calm place
+            Record, audit, and filter daily personal income and expenses
           </p>
         </div>
 
-        <div className="transaction-header-actions">
-          <button
-            className="btn-secondary"
-            onClick={() => {
-              setEditingTxn(null);
-              setFormDefaultType('income');
-              setShowForm(true);
-            }}
-          >
-            <TrendingUp size={18} />
-            <span>Log money in</span>
-          </button>
-          <button
-            className="btn-primary"
-            onClick={() => {
-              setEditingTxn(null);
-              setFormDefaultType('expense');
-              setShowForm(true);
-            }}
-          >
-            <PlusCircle size={18} />
-            <span>Log a spend</span>
-          </button>
-        </div>
+        <button
+          className="btn-primary"
+          onClick={() => {
+            if (editingTxn) setEditingTxn(null);
+            setShowForm(!showForm);
+          }}
+        >
+          {showForm || editingTxn ? (
+            <>
+              <X size={16} />
+              <span>Close Form</span>
+            </>
+          ) : (
+            <>
+              <PlusCircle size={16} />
+              <span>Record Transaction</span>
+            </>
+          )}
+        </button>
       </div>
 
       {/* Add / Edit Form Modal / Collapsible Section */}
@@ -285,7 +279,7 @@ function Transactions({ onToast }) {
         <div className="card-title">
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <ReceiptText size={18} color="var(--accent)" />
-            <span>Everything you've logged</span>
+            <span>Recorded Transactions</span>
           </div>
           <span className="total-stat-pill">
             {transactions.length} record{transactions.length === 1 ? '' : 's'}

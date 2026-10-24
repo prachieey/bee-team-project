@@ -87,5 +87,3 @@
     max-width: unset;
   }
 }
-.toast { background: var(--ink); border: 0; border-radius: 18px; box-shadow: var(--shadow); color: white; }
-.toast-success .toast-icon-wrapper { background: var(--lime); color: var(--ink); }

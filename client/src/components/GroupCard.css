@@ -120,9 +120,3 @@
 .group-delete-btn {
   padding: 0.4rem 0.65rem;
 }
-.group-card { background: var(--bg-surface); border: 0; border-radius: var(--radius-lg); box-shadow: var(--shadow-soft); }
-.group-card:hover { border: 0; box-shadow: var(--shadow); }
-.group-avatar-icon { background: var(--lilac); border: 0; }
-.group-card-title { color: var(--ink); font-family: var(--font-display); }
-.group-members-count, .group-member-names { color: var(--ink-soft); }
-.group-card-actions { border-top-color: var(--line); }

@@ -92,9 +92,9 @@ function Groups({ onToast }) {
       {/* Page Header */}
       <div className="page-header">
         <div>
-          <h1 className="page-title">Your <em style={{ fontFamily: 'var(--font-serif)', fontWeight: 400 }}>people</em></h1>
+          <h1 className="page-title">Expense Groups</h1>
           <p className="page-subtitle">
-            Trips, flatmates and friends — without the awkward math
+            Split group bills, shared apartments, or travel expenses with friends
           </p>
         </div>
 
@@ -107,7 +107,7 @@ function Groups({ onToast }) {
           ) : (
             <>
               <PlusCircle size={16} />
-              <span>Start a group</span>
+              <span>Create New Group</span>
             </>
           )}
         </button>
@@ -119,7 +119,7 @@ function Groups({ onToast }) {
           <div className="card-title">
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <UserPlus size={18} color="var(--accent)" />
-              <span>Start something together</span>
+              <span>Create a New Expense Group</span>
             </div>
             <button className="btn-ghost btn-sm" onClick={() => setShowCreate(false)} aria-label="Close">
               <X size={16} />
@@ -182,7 +182,7 @@ function Groups({ onToast }) {
           <div className="section-card">
             <div className="empty-state">
               <Users2 className="empty-state-icon" />
-              <p>No groups yet. Start one with your flatmates, trip crew or friends and stop doing math in your head.</p>
+              <p>You aren't a member of any groups yet.</p>
               <span className="empty-state-sub">
                 Create a group above or ask a friend to add your email ({user?.email}) to their group.
               </span>
@@ -191,7 +191,7 @@ function Groups({ onToast }) {
                 onClick={() => setShowCreate(true)}
                 style={{ marginTop: '1.25rem' }}
               >
-                <PlusCircle size={14} /> Start your first group
+                <PlusCircle size={14} /> Create Your First Group
               </button>
             </div>
           </div>

@@ -64,7 +64,7 @@ function Profile({ onToast }) {
 
   const handleConfirmLogout = async () => {
     await logout();
-    onToast?.('See you soon!', 'info');
+    onToast?.('Logged out successfully.', 'info');
     navigate('/login', { replace: true });
   };
 
@@ -80,9 +80,9 @@ function Profile({ onToast }) {
       {/* Page Header */}
       <div className="page-header">
         <div>
-          <h1 className="page-title">You</h1>
+          <h1 className="page-title">Account Profile</h1>
           <p className="page-subtitle">
-            Your details, kept simple
+            Manage your personal credentials, display name, and session security
           </p>
         </div>
       </div>
@@ -118,7 +118,7 @@ function Profile({ onToast }) {
 
             {/* Email (Read only) */}
             <div className="form-group">
-            <label htmlFor="profile-email">Email address</label>
+              <label htmlFor="profile-email">Email Address (Account Identifier)</label>
               <input
                 id="profile-email"
                 type="email"
@@ -131,7 +131,7 @@ function Profile({ onToast }) {
 
             {/* User ID (MongoDB ObjectId copyable) */}
             <div className="form-group">
-            <label htmlFor="profile-id">Your SettleUp ID</label>
+              <label htmlFor="profile-id">User ID (MongoDB ObjectId)</label>
               <div className="id-copy-row">
                 <input
                   id="profile-id"
@@ -152,7 +152,7 @@ function Profile({ onToast }) {
                 </button>
               </div>
               <span className="form-hint">
-                A quiet little ID SettleUp uses behind the scenes.
+                Cryptographically secure identifier used for group authorizations and transaction audit logs.
               </span>
             </div>
 
@@ -170,7 +170,7 @@ function Profile({ onToast }) {
           <div className="card-title">
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <Shield size={18} color="var(--accent)" />
-              <span>You're signed in securely</span>
+              <span>Session & Security</span>
             </div>
           </div>
 
@@ -180,8 +180,8 @@ function Profile({ onToast }) {
                 <Key size={16} color="var(--accent)" />
               </div>
               <div>
-                <strong>Your session is private</strong>
-                <p>Your sign-in stays protected on this browser.</p>
+                <strong>JWT Session Token</strong>
+                <p>Stored securely in an HTTP-only, SameSite=Strict cookie against XSS attacks.</p>
               </div>
             </div>
 
@@ -190,8 +190,8 @@ function Profile({ onToast }) {
                 <CheckCircle2 size={16} color="var(--income-green)" />
               </div>
               <div>
-                <strong>You're good to go</strong>
-                <p>Only you can see and change your money.</p>
+                <strong>Active Authentication</strong>
+                <p>Protected API endpoints verify tenant isolation for all database transactions.</p>
               </div>
             </div>
           </div>
@@ -206,7 +206,7 @@ function Profile({ onToast }) {
               style={{ width: '100%', justifyContent: 'center', padding: '0.75rem' }}
             >
               <LogOut size={16} />
-              <span>Log out</span>
+              <span>Sign Out of SettleUp</span>
             </button>
           </div>
         </section>
@@ -215,8 +215,8 @@ function Profile({ onToast }) {
       {/* Confirmation Modal for Logout */}
       <ConfirmModal
         isOpen={showLogoutModal}
-        title="Log out"
-        message="Ready to head out? You can come back whenever you like."
+        title="Sign Out"
+        message="Are you sure you want to end your current SettleUp session? You will be redirected to the login page."
         confirmText="Log Out"
         cancelText="Stay Signed In"
         isDanger={false}

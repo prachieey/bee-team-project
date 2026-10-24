@@ -45,9 +45,9 @@ function FinanceChart({ monthlySummary = [] }) {
     <div className="finance-chart-container">
       <div className="finance-chart-header">
         <div>
-        <h3 className="finance-chart-title">Your year so far</h3>
+          <h3 className="finance-chart-title">Cash Flow & Trends</h3>
           <p className="finance-chart-subtitle">
-            A gentle look at money in and money out
+            Monthly income vs expense comparison for {new Date().getFullYear()}
           </p>
         </div>
 

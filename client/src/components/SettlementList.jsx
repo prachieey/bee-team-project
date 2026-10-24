@@ -46,14 +46,14 @@ function SettlementList({ netBalances = {}, transactions = [], memberMap = {}, o
       <section className="settlement-section" aria-label="Group net balances">
         <div className="section-header-row">
           <div>
-            <h3 className="section-title">Who’s up, who’s down</h3>
+            <h3 className="section-title">Individual Net Balances</h3>
             <p className="section-desc">
-              A quick snapshot of where everyone stands.
+              Computed by adding total expenses paid and subtracting individual split shares.
             </p>
           </div>
           <div className="section-badge-pill">
             <Scale size={14} />
-            <span>At a glance</span>
+            <span>Net Balances</span>
           </div>
         </div>
 
@@ -119,14 +119,14 @@ function SettlementList({ netBalances = {}, transactions = [], memberMap = {}, o
       <section className="settlement-section" aria-label="Optimal repayment plan">
         <div className="section-header-row">
           <div>
-            <h3 className="section-title">The easiest way to settle</h3>
+            <h3 className="section-title">Optimal Repayment Plan</h3>
             <p className="section-desc">
-              Fewer payments, less fuss, everyone square.
+              Minimum number of direct transactions to clear all group debts (Greedy debtor-creditor algorithm).
             </p>
           </div>
           <div className="section-badge-pill">
             <Sparkles size={14} />
-            <span>Nice and simple</span>
+            <span>Debt Minimization</span>
           </div>
         </div>
 
@@ -135,8 +135,8 @@ function SettlementList({ netBalances = {}, transactions = [], memberMap = {}, o
             <div className="settled-icon-circle">
               <CheckCircle2 size={36} color="var(--income-green)" />
             </div>
-              <h4>All square.</h4>
-              <p>Nobody owes anybody. Enjoy it.</p>
+            <h4>All Settled Up!</h4>
+            <p>Every member is fully square. There are no outstanding payments pending.</p>
           </div>
         ) : transactions.length === 0 ? (
           <div className="all-settled-box">

@@ -62,9 +62,9 @@ function Login({ onToast }) {
             <Wallet size={16} />
             <span>SettleUp Finance</span>
           </div>
-          <h1 className="auth-title">Good to see you again</h1>
+          <h1 className="auth-title">Welcome Back</h1>
           <p className="auth-subtitle">
-            Your money diary is waiting.
+            Sign in to manage your daily expenses and group settlements
           </p>
         </div>
 
@@ -133,7 +133,7 @@ function Login({ onToast }) {
               <span>Authenticating…</span>
             ) : (
               <>
-                <span>Let's go</span>
+                <span>Sign In</span>
                 <ArrowRight size={16} />
               </>
             )}
@@ -141,9 +141,9 @@ function Login({ onToast }) {
         </form>
 
         <p className="auth-footer">
-          New here?{' '}
+          Don't have an account?{' '}
           <Link to="/signup" className="auth-link">
-            Join SettleUp
+            Create an account
           </Link>
         </p>
       </div>

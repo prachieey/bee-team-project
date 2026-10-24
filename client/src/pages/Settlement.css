@@ -73,7 +73,3 @@
   font-size: 0.84rem;
   color: var(--text-muted);
 }
-.settlement-group-bar { background: var(--lime); border: 0; border-radius: var(--radius-lg); box-shadow: var(--shadow-soft); }
-.group-bar-badge { background: rgba(27,26,23,.1); color: var(--ink); }
-.group-bar-name { color: var(--ink); font-family: var(--font-display); }
-.group-bar-meta { color: rgba(27,26,23,.65); }

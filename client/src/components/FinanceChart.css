@@ -60,7 +60,7 @@
 .chart-empty-state {
   text-align: center;
   padding: 3rem 1.5rem;
-  background: var(--surface-2);
+  background: rgba(14, 21, 36, 0.4);
   border: 1px dashed var(--border);
   border-radius: var(--radius);
   color: var(--text-secondary);

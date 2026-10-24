@@ -8,7 +8,6 @@ import FinanceChart from '../components/FinanceChart';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { formatCurrency, formatDate } from '../utils/formatters';
 import { getCategoryIcon, getTypeIcon } from '../utils/categoryIcons';
-import { useAuth } from '../context/AuthContext';
 import {
   TrendingUp,
   TrendingDown,
@@ -24,7 +23,6 @@ import {
 import './Dashboard.css';
 
 function Dashboard({ onToast }) {
-  const { user } = useAuth();
   const [summary, setSummary] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -81,35 +79,46 @@ function Dashboard({ onToast }) {
   // Calculate Net Cash Flow Status Badge
   let balanceStatus = { text: 'Break Even (₹0)', type: 'neutral' };
   if (balance > 0) {
-    balanceStatus = { text: `You're ahead by ${formatCurrency(balance)}`, type: 'positive' };
+    balanceStatus = { text: `Net Surplus (+${formatCurrency(balance)})`, type: 'positive' };
   } else if (balance < 0) {
-    balanceStatus = { text: `${formatCurrency(Math.abs(balance))} more out`, type: 'negative' };
+    balanceStatus = { text: `Net Deficit (-${formatCurrency(Math.abs(balance))})`, type: 'negative' };
   }
 
   // Calculate savings / retention rate if income exists
   const savingsRate = income > 0 ? Math.round(((income - expense) / income) * 100) : null;
-  const hour = new Date().getHours();
-  const timeOfDay = hour < 12 ? 'morning' : hour < 17 ? 'afternoon' : 'evening';
-  const firstName = user?.name?.split(' ')[0] || 'there';
 
   return (
     <div className="container">
-      {/* Top Header */}
+      {/* Top Header & Prominent Quick Actions */}
       <div className="page-header">
         <div>
-          <h1 className="page-title">Good {timeOfDay}, {firstName}.<br />Here's where your <em style={{ fontFamily: 'var(--font-serif)', fontWeight: 400 }}>money</em> went</h1>
+          <h1 className="page-title">Financial Overview</h1>
           <p className="page-subtitle">
-            Your month at a glance
+            Real-time cash flow, category distributions, and group activity
           </p>
         </div>
 
+        <div className="header-actions">
+          <Link to="/transactions?action=income" className="btn-secondary btn-sm">
+            <TrendingUp size={15} color="var(--income-green)" />
+            <span>Add Income</span>
+          </Link>
+          <Link to="/transactions?action=expense" className="btn-primary btn-sm">
+            <PlusCircle size={15} />
+            <span>Record Expense</span>
+          </Link>
+          <Link to="/groups" className="btn-secondary btn-sm">
+            <Users2 size={15} />
+            <span>Groups</span>
+          </Link>
+        </div>
       </div>
 
       {/* 1. Summary KPI Grid */}
       <section className="summary-grid" aria-label="Financial summary cards">
         <SummaryCard
-          title="What's left"
-          subtitle="After money in and money out"
+          title="Net Cash Flow"
+          subtitle="Calculated from real transactions"
           amount={formatCurrency(balance)}
           type="balance"
           statusBadge={balanceStatus}
@@ -117,7 +126,7 @@ function Dashboard({ onToast }) {
         />
 
         <SummaryCard
-          title="Money in"
+          title="Total Income"
           subtitle={`${incomeCount} transaction${incomeCount === 1 ? '' : 's'}`}
           amount={formatCurrency(income)}
           type="income"
@@ -125,7 +134,7 @@ function Dashboard({ onToast }) {
         />
 
         <SummaryCard
-          title="Money out"
+          title="Total Expenses"
           subtitle={`${expenseCount} transaction${expenseCount === 1 ? '' : 's'}`}
           amount={formatCurrency(expense)}
           type="expense"
@@ -145,7 +154,7 @@ function Dashboard({ onToast }) {
           <div className="card-title">
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <PieChart size={18} color="var(--accent)" />
-              <span>Where it went</span>
+              <span>Spending by Category</span>
             </div>
             <span className="total-stat-pill">
               Total: {formatCurrency(expense)}
@@ -200,7 +209,7 @@ function Dashboard({ onToast }) {
           <div className="card-title">
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <History size={18} color="var(--accent)" />
-              <span>Latest from your diary</span>
+              <span>Recent Activity</span>
             </div>
             <Link to="/transactions" className="card-action-link">
               <span>View all</span>
