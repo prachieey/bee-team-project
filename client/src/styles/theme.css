@@ -75,13 +75,38 @@ option { color: var(--ink) !important; background: var(--surface) !important; }
 .btn:focus-visible, .btn-primary:focus-visible, .btn-secondary:focus-visible, .btn-ghost:focus-visible, .btn-danger:focus-visible, .btn-password-toggle:focus-visible, .btn-logout:focus-visible { outline: 0; box-shadow: 0 0 0 3px var(--lilac) !important; }
 .btn:disabled, .btn-primary:disabled, .btn-secondary:disabled, .btn-ghost:disabled, .btn-danger:disabled { opacity: .5; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
 .header-actions, .form-actions, .filters-wrapper, .group-card-actions, .modal-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-.transaction-header-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.transaction-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
 .nav-link, .user-profile-chip, .btn-logout, .mobile-logout-btn, .type-toggle-btn, .split-segment-btn, .modal-close-btn, .toast-close { display: inline-flex; align-items: center; gap: 8px; }
 .form-actions { margin-top: 24px !important; }
 
 /* Shared page rhythm */
 .container { max-width: 1200px !important; padding: 40px 24px 64px !important; }
-.page-header { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; margin-bottom: 32px !important; }
+  .page-header {
+    display: flex;
+    align-items: flex-start; /* changed from baseline to avoid overlap */
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 32px !important;
+    flex-wrap: wrap; /* ensure wrapping on small screens */
+  }
+
+  .page-title {
+    font-size: clamp(1.8rem, 5vw, 3rem) !important;
+    line-height: 1.2;
+    margin-bottom: 0.4rem;
+  }
+
+  .page-subtitle {
+    margin-top: 0.6rem !important;
+    font-size: 1rem !important;
+    line-height: 1.4;
+  }
 .page-header > div:first-child { min-width: 0; }
 .page-subtitle { margin-top: 8px !important; font-size: 17px !important; line-height: 1.45; }
 .section-card, .summary-card, .group-card, .settlement-section { margin-bottom: 0; }

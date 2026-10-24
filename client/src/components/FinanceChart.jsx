@@ -36,7 +36,7 @@ function FinanceChart({ monthlySummary = [] }) {
   // Find max value for scaling the bars
   const maxVal = Math.max(
     ...monthlyData.map((d) => Math.max(d.income, d.expense)),
-    1000 // minimum floor for clean display
+    0 // dynamic floor based on data
   );
 
   const hasData = monthlyData.some((d) => d.income > 0 || d.expense > 0);

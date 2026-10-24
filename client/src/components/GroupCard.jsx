@@ -42,30 +42,20 @@ function GroupCard({ group, currentUserId, onDelete }) {
       </div>
 
       <div className="group-card-body">
-        {/* Avatar Stack */}
-        <div className="group-member-stack">
-          <div className="avatar-group">
-            {members.slice(0, 4).map((m, idx) => (
-              <div
-                key={m._id || idx}
-                className="avatar-circle sm"
-                title={m.name || m.email || 'Member'}
-              >
-                {getInitials(m.name || m.email)}
-              </div>
-            ))}
-            {members.length > 4 && (
-              <div className="avatar-circle sm avatar-more" title={`${members.length - 4} more members`}>
-                +{members.length - 4}
-              </div>
-            )}
+      {/* Member List */}
+      <div className="group-members-list">
+        {members.slice(0, 3).map((m, idx) => (
+          <div key={m._id || idx} className="member-row">
+            <div className="avatar-circle sm" title={m.name || m.email || 'Member'}>
+              {getInitials(m.name || m.email)}
+            </div>
+            <span className="member-name">{m.name || m.email}</span>
           </div>
-
-          <div className="group-member-names">
-            {members.slice(0, 2).map((m) => m.name || m.email).join(', ')}
-            {members.length > 2 && ` and ${members.length - 2} others`}
-          </div>
-        </div>
+        ))}
+        {members.length > 3 && (
+          <div className="member-more" title={`${members.length - 3} more members`}>+{members.length - 3} more</div>
+        )}
+      </div>
       </div>
 
       <div className="group-card-actions">

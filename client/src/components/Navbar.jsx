@@ -1,7 +1,7 @@
 // src/components/Navbar.jsx
 // Premium navigation bar with responsive drawer, brand mark, and active indicators
 import { useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import {
   LayoutDashboard,
@@ -19,6 +19,7 @@ import './Navbar.css';
 function Navbar({ onToast }) {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleLogout = async () => {
@@ -76,7 +77,13 @@ function Navbar({ onToast }) {
 
           <NavLink
             to="/groups"
-            className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}
+            className={({ isActive }) => {
+              const { pathname } = location;
+              // Highlight Groups for /groups and /groups/:id (detail) but not settlement pages
+              const active = pathname.startsWith('/groups') && !pathname.includes('/settlement');
+              return active ? 'nav-link active' : 'nav-link';
+            }}
+            onClick={closeMobileMenu}
           >
             <Users2 size={17} />
             <span>Groups</span>
@@ -84,7 +91,12 @@ function Navbar({ onToast }) {
 
           <NavLink
             to="/settlement"
-            className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}
+            className={({ isActive }) => {
+              const { pathname } = location;
+              const active = pathname.includes('/settlement');
+              return active ? 'nav-link active' : 'nav-link';
+            }}
+            onClick={closeMobileMenu}
           >
             <Scale size={17} />
             <span>Settlement</span>

@@ -76,9 +76,9 @@
 
 .chart-bars-wrapper {
   position: relative;
-  height: 220px;
+  height: 180px; /* reduced height for less empty space */
   width: 100%;
-  padding-top: 1.5rem;
+  padding-top: 1rem; /* less top padding */
   margin-top: 0.5rem;
 }
 
@@ -120,7 +120,7 @@
 
 .bars-pair {
   width: 100%;
-  max-width: 32px;
+  max-width: 48px; /* increased for clearer bars */
   height: calc(100% - 2rem);
   display: flex;
   align-items: flex-end;

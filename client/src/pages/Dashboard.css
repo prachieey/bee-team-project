@@ -2,8 +2,9 @@
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 0.65rem;
+  gap: 1rem;
   flex-wrap: wrap;
+  margin-top: 0.5rem;
 }
 
 .summary-grid {
@@ -233,7 +234,11 @@
 }
 .dashboard-grid { gap: 1.5rem; }
 .summary-grid { gap: 1.25rem; }
-.chart-section-card { background: var(--lilac); }
+.chart-section-card {
+  background: var(--surface) !important; /* match design surface */
+  color: var(--ink) !important;
+}
+
 .finance-chart-title { color: var(--ink); font-family: var(--font-display); }
 .finance-chart-subtitle { color: rgba(27,26,23,.65); }
 .chart-bars-wrapper { background: rgba(255,255,255,.3); border-radius: 22px; }
