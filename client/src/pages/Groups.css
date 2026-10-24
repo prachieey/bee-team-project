@@ -10,3 +10,6 @@
   color: var(--text-muted);
   margin-top: 0.25rem;
 }
+.groups-grid { gap: 1.25rem; }
+.form-reveal { background: var(--lilac); }
+.group-switcher-wrapper, .group-switcher-select { border: 0; border-radius: var(--radius-pill); background: var(--bg-surface); color: var(--ink); }

@@ -165,7 +165,7 @@
 
 /* Participants Tray */
 .expense-participants-tray {
-  background: rgba(8, 12, 20, 0.5);
+  background: var(--surface-2);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   padding: 0.75rem 1rem;

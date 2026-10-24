@@ -33,7 +33,7 @@
 
 .type-toggle-btn.income.active {
   background: var(--income-green);
-  color: #032014;
+  color: #fff;
   box-shadow: 0 2px 8px var(--income-border);
 }
 
@@ -72,3 +72,9 @@
   border-color: var(--expense-red);
   box-shadow: 0 0 0 2px rgba(244, 63, 94, 0.2);
 }
+.premium-form { background: var(--bg-soft); border-radius: 22px; padding: 1rem; }
+.type-toggle-container { background: var(--bg-surface); border: 0; border-radius: var(--radius-full); padding: .25rem; }
+.type-toggle-btn { border-radius: var(--radius-full); color: var(--ink-soft); }
+.type-toggle-btn.active.expense { background: var(--coral); color: white; }
+.type-toggle-btn.active.income { background: var(--green); color: white; }
+.input-prefix { color: var(--ink-soft); }

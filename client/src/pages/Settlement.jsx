@@ -83,9 +83,9 @@ function Settlement({ onToast }) {
       {/* Page Header */}
       <div className="page-header">
         <div>
-          <h1 className="page-title">Settlement Engine</h1>
+          <h1 className="page-title">Settle <em style={{ fontFamily: 'var(--font-serif)', fontWeight: 400 }}>up</em></h1>
           <p className="page-subtitle">
-            Minimal-transaction debt resolution powered by real persisted group expenses
+            A simple, fair way to get everyone square
           </p>
         </div>
 
@@ -117,12 +117,12 @@ function Settlement({ onToast }) {
         <div className="section-card">
           <div className="empty-state">
             <Users2 className="empty-state-icon" />
-            <p>You don't have any groups to settle yet.</p>
+            <p>All square — once you start a group.</p>
             <span className="empty-state-sub">
               Create an expense group, log your shared bills, and SettleUp will compute settlements.
             </span>
             <Link to="/groups" className="btn-primary btn-sm" style={{ marginTop: '1.25rem' }}>
-              Create a Group First
+              Start a group
             </Link>
           </div>
         </div>

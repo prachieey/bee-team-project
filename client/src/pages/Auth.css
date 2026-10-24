@@ -45,3 +45,12 @@
 .auth-link:hover {
   text-decoration: underline;
 }
+.auth-page { min-height: 100vh; background: var(--ink); padding: 2rem; }
+.auth-page::before { background: radial-gradient(circle, rgba(215,242,107,.22), transparent 62%); }
+.auth-card { max-width: 520px; background: var(--lilac); border: 0; border-radius: 32px; box-shadow: var(--shadow); padding: clamp(2rem, 5vw, 3.5rem); }
+.auth-brand-badge { background: var(--lime); border: 0; color: var(--ink); }
+.auth-title { font-family: var(--font-display); color: var(--ink); font-size: clamp(2.2rem, 5vw, 3.5rem); }
+.auth-subtitle { color: var(--ink-soft); }
+.auth-submit-btn { width: 100%; padding: 1rem; }
+.auth-link { color: var(--green); font-weight: 700; }
+.auth-footer { color: var(--ink-soft); }

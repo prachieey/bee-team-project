@@ -131,3 +131,12 @@
   color: var(--text-secondary);
   border: 1px solid var(--border);
 }
+.summary-card { padding: 1.5rem; min-height: 170px; }
+.summary-card-title { color: var(--ink-soft); }
+.summary-card-sub { color: var(--ink-faint); }
+.summary-card-amount { color: var(--ink); font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-variant-numeric: tabular-nums; }
+.card-balance { background: var(--ink); color: white; min-height: 240px; }
+.card-balance .summary-card-title, .card-balance .summary-card-sub, .card-balance .summary-card-amount { color: white; }
+.card-income { background: var(--lime); }
+.card-expense { background: #ffd2ca; }
+.summary-card:hover { transform: translateY(-4px); }

@@ -1,6 +1,6 @@
 /* src/components/Navbar.css */
 .navbar {
-  background: rgba(14, 21, 36, 0.85);
+  background: var(--surface);
   border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
@@ -243,3 +243,18 @@
     display: flex;
   }
 }
+.navbar { background: rgba(244,241,234,.88); border-bottom: 1px solid var(--line); backdrop-filter: blur(16px); }
+.navbar-container { max-width: 1240px; padding: .8rem 2rem; }
+.navbar-logo { color: var(--ink); }
+.logo-badge { background: var(--lime); color: var(--ink); border: 0; }
+.logo-text { font-family: var(--font-display); letter-spacing: -.04em; }
+.logo-accent { color: var(--green); }
+.logo-tag { background: var(--lilac); color: var(--ink); border: 0; }
+.navbar-links { background: transparent; }
+.nav-link { color: var(--ink-soft); border-radius: var(--radius-full); }
+.nav-link:hover, .nav-link.active { color: var(--ink); background: var(--lime); }
+.user-profile-chip { color: var(--ink); }
+.avatar-circle { background: var(--lilac); color: var(--ink); border: 2px solid var(--bg-surface); }
+.btn-logout { color: var(--ink-soft); }
+.mobile-drawer { background: var(--bg-surface); }
+@media (max-width: 700px) { .navbar-container { padding: .8rem 1rem; } }
