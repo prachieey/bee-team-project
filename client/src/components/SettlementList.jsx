@@ -11,10 +11,12 @@ import {
   Scale,
   Check,
 } from 'lucide-react';
+import { markPayment } from '../services/groupService';
 import './SettlementList.css';
 
-function SettlementList({ netBalances = {}, transactions = [], memberMap = {}, onToast }) {
+function SettlementList({ netBalances = {}, transactions = [], memberMap = {}, onToast, groupId, onRefresh }) {
   const [settledTxnIds, setSettledTxnIds] = useState(new Set());
+  const [pendingIds, setPendingIds] = useState(new Set());
   const balanceEntries = Object.entries(netBalances);
 
   const getMemberName = (id) => {
@@ -28,12 +30,29 @@ function SettlementList({ netBalances = {}, transactions = [], memberMap = {}, o
     return name.slice(0, 2).toUpperCase();
   };
 
-  const handleMarkSettled = (index, fromName, toName, amount) => {
-    setSettledTxnIds((prev) => new Set(prev).add(index));
-    onToast?.(
-      `Payment of ${formatCurrency(amount)} from ${fromName} to ${toName} acknowledged.`,
-      'success'
-    );
+  // Calls backend to record payment and refresh data
+  const handleMarkPaid = async (index, fromId, toId, fromName, toName, amount) => {
+    // Mark as pending to disable button
+    setPendingIds((prev) => new Set(prev).add(index));
+    try {
+      await markPayment(groupId, { from: fromId, to: toId, amount });
+      // After successful payment, trigger parent refresh to reload balances & transactions
+      onRefresh?.();
+      onToast?.(
+        `Payment of ${formatCurrency(amount)} from ${fromName} to ${toName} recorded.`,
+        'success'
+      );
+    } catch (err) {
+      console.error('Error marking payment:', err);
+      onToast?.('Failed to record payment. Please try again.', 'error');
+    } finally {
+      // Remove pending state
+      setPendingIds((prev) => {
+        const next = new Set(prev);
+        next.delete(index);
+        return next;
+      });
+    }
   };
 
   const isAllSettled =
@@ -150,8 +169,9 @@ function SettlementList({ netBalances = {}, transactions = [], memberMap = {}, o
           <div className="transactions-list">
             {transactions.map((txn, index) => {
               const fromName = txn.fromName || getMemberName(txn.from);
-              const toName = txn.toName || getMemberName(txn.to);
+              const toName   = txn.toName   || getMemberName(txn.to);
               const isMarked = settledTxnIds.has(index);
+              const isPending = pendingIds.has(index);
 
               return (
                 <div key={index} className={`repayment-card ${isMarked ? 'is-settled' : ''}`}>
@@ -192,14 +212,16 @@ function SettlementList({ netBalances = {}, transactions = [], memberMap = {}, o
                   <div className="repayment-action">
                     <button
                       className={`btn-sm ${isMarked ? 'btn-secondary' : 'btn-primary'}`}
-                      onClick={() => handleMarkSettled(index, fromName, toName, txn.amount)}
-                      disabled={isMarked}
+                      onClick={() => handleMarkPaid(index, txn.from, txn.to, fromName, toName, txn.amount)}
+                      disabled={isMarked || isPending}
                     >
                       {isMarked ? (
                         <>
                           <Check size={14} />
                           <span>Acknowledged</span>
                         </>
+                      ) : isPending ? (
+                        <span>Processing…</span>
                       ) : (
                         <span>Mark Paid</span>
                       )}

@@ -148,13 +148,17 @@ function Settlement({ onToast }) {
             </Link>
           </div>
 
-          {/* Settlement List */}
-          <SettlementList
-            netBalances={settlementData.netBalances}
-            transactions={settlementData.transactions || settlementData.settlementPlan || []}
-            memberMap={memberMap}
-            onToast={onToast}
-          />
+          
+{/* Settlement List */}
+<SettlementList
+  netBalances={settlementData.netBalances}
+  transactions={settlementData.transactions || settlementData.settlementPlan || []}
+  memberMap={memberMap}
+  onToast={onToast}
+  groupId={selectedGroupId || routeGroupId}
+  onRefresh={() => loadSettlement(selectedGroupId || routeGroupId)}
+/>
+
         </div>
       )}
     </div>

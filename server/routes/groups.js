@@ -2,6 +2,7 @@
 const express = require('express');
 const router  = express.Router();
 const { getGroups, createGroup, getGroup, updateGroup, deleteGroup } = require('../controllers/groupController');
+const { paySettlement } = require('../controllers/settlementController');
 const {
   getGroupExpenses,
   createGroupExpense,
@@ -31,5 +32,6 @@ router
 
 // Settlement calculation
 router.get('/:id/settlement', getSettlement);
+router.post('/:id/settlement/pay', paySettlement);
 
 module.exports = router;

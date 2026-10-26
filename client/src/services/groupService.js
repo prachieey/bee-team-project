@@ -17,4 +17,6 @@ export const deleteGroupExpense = (groupId, expId)     => api.delete(`/groups/${
 // Settlement
 export const getSettlement      = (groupId) => api.get(`/groups/${groupId}/settlement`);
 export const getGroupSettlement = (groupId) => api.get(`/groups/${groupId}/settlement`);
+// New: record payment settlement
+export const markPayment = (groupId, payload) => api.post(`/groups/${groupId}/settlement/pay`, payload);
 

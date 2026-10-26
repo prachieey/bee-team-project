@@ -5,8 +5,11 @@
 const Group        = require('../models/Group');
 const GroupExpense = require('../models/GroupExpense');
 const { splitEqually, splitCustom }               = require('../utils/splitEngine');
-const { calculateNetBalances, computeSettlement } = require('../utils/settlementEngine');
-
+const GroupPayment = require('../models/GroupPayment');
+const {
+  calculateNetBalances,
+  computeSettlement,
+} = require('../utils/settlementEngine');
 // ── Helper: verify caller is a group member ─────────────────────────────────
 const assertMember = (group, userId) => {
   const targetId = userId.toString();
@@ -296,65 +299,98 @@ const deleteGroupExpense = async (req, res, next) => {
 
 // ── GET /api/groups/:id/settlement ──────────────────────────────────────────
 // Returns net balances and optimal repayment plan from real stored data
+
 const getSettlement = async (req, res, next) => {
   try {
     const group = await Group.findById(req.params.id)
       .populate('members', 'name email');
 
-    if (!group) return res.status(404).json({ success: false, message: 'Group not found.' });
+    if (!group) {
+      return res.status(404).json({
+        success: false,
+        message: 'Group not found.',
+      });
+    }
+
     assertMember(group, req.user._id);
 
-    const expenses = await GroupExpense.find({ groupId: req.params.id })
-      .populate('paidBy',             'name email')
+    const expenses = await GroupExpense.find({
+      groupId: req.params.id,
+    })
+      .populate('paidBy', 'name email')
       .populate('participants.userId', 'name email');
 
-    // Build memberIds array (strings for the engine)
-    const memberIds = group.members.map((m) => (m._id || m).toString());
+    const memberIds = group.members.map((m) =>
+      (m._id || m).toString()
+    );
 
-    // Calculate net balances using ported settlement engine
+    // Calculate balances from stored expenses.
     const balances = calculateNetBalances(expenses, memberIds);
 
-    // Map userId → name for display
-    const userMap = {};
-    group.members.forEach((m) => {
-      userMap[(m._id || m).toString()] = m.name || m.email;
+    // Apply payments already recorded in MongoDB.
+    const payments = await GroupPayment.find({
+      groupId: req.params.id,
     });
 
-    // Compute minimal transactions
+    payments.forEach((payment) => {
+      const fromId = payment.from.toString();
+      const toId = payment.to.toString();
+      const amount = Number(payment.amount);
+
+      balances[fromId] = (balances[fromId] || 0) + amount;
+      balances[toId] = (balances[toId] || 0) - amount;
+    });
+
+    // Map member IDs to display names.
+    const userMap = {};
+    group.members.forEach((member) => {
+      const id = (member._id || member).toString();
+      userMap[id] = member.name || member.email;
+    });
+
     const transactions = computeSettlement(balances);
 
-    // Format balances for response (include user names)
-    const formattedBalances = Object.entries(balances).map(([uid, amount]) => ({
-      userId: uid,
-      name:   userMap[uid] || uid,
-      amount: Math.round(amount * 100) / 100,
-      status: amount > 0.005 ? 'creditor' : amount < -0.005 ? 'debtor' : 'settled',
-    }));
+    const formattedBalances = Object.entries(balances).map(
+      ([uid, amount]) => ({
+        userId: uid,
+        name: userMap[uid] || uid,
+        amount: Math.round(amount * 100) / 100,
+        status:
+          amount > 0.005
+            ? 'creditor'
+            : amount < -0.005
+              ? 'debtor'
+              : 'settled',
+      })
+    );
 
-    // Format transactions with names
     const formattedTransactions = transactions.map((t) => ({
-      from:       t.from,
-      fromName:   userMap[t.from] || t.from,
-      to:         t.to,
-      toName:     userMap[t.to]   || t.to,
-      amount:     t.amount,
+      from: t.from,
+      fromName: userMap[t.from] || t.from,
+      to: t.to,
+      toName: userMap[t.to] || t.to,
+      amount: t.amount,
     }));
 
-    res.json({
+    return res.json({
       success: true,
       data: {
-        group:          { _id: group._id, name: group.name },
-        netBalances:    balances,
-        balances:       formattedBalances,
+        group: {
+          _id: group._id,
+          name: group.name,
+        },
+        netBalances: balances,
+        balances: formattedBalances,
         settlementPlan: formattedTransactions,
-        transactions:   formattedTransactions,
-        totalExpenses:  expenses.length,
+        transactions: formattedTransactions,
+        totalExpenses: expenses.length,
       },
     });
   } catch (err) {
     next(err);
   }
 };
+
 
 module.exports = {
   getGroupExpenses,
