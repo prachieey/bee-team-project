@@ -18,14 +18,17 @@ const errorHandler = (err, req, res, next) => {
   // Mongoose duplicate key error (e.g. duplicate email)
   if (err.code === 11000) {
     statusCode = 409;
-    const field = Object.keys(err.keyValue)[0];
-    message = `${field.charAt(0).toUpperCase() + field.slice(1)} already exists.`;
+    const keySource = err.keyValue || err.keyPattern || {};
+    const field = Object.keys(keySource)[0];
+    message = field
+      ? `${field.charAt(0).toUpperCase() + field.slice(1)} already exists.`
+      : 'Resource already exists.';
   }
 
   // Mongoose CastError (invalid ObjectId)
   if (err.name === 'CastError') {
     statusCode = 400;
-    message = `Invalid ${err.path}: ${err.value}`;
+    message = `Invalid ${err.path || 'field'}: ${err.value ?? ''}`;
   }
 
   // JWT errors
