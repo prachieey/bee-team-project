@@ -8,11 +8,12 @@
  * @returns {string}  e.g. "₹1,200.50"
  */
 export const formatCurrency = (amount = 0) => {
+  const numericAmount = Number(amount) || 0;
   return new Intl.NumberFormat('en-IN', {
     style:    'currency',
     currency: 'INR',
     minimumFractionDigits: 2,
-  }).format(amount);
+  }).format(numericAmount);
 };
 
 /**
@@ -22,7 +23,9 @@ export const formatCurrency = (amount = 0) => {
  */
 export const formatDate = (dateInput) => {
   if (!dateInput) return '—';
-  return new Date(dateInput).toLocaleDateString('en-IN', {
+  const parsedDate = new Date(dateInput);
+  if (isNaN(parsedDate.getTime())) return '—';
+  return parsedDate.toLocaleDateString('en-IN', {
     day:   '2-digit',
     month: 'short',
     year:  'numeric',
@@ -37,6 +40,7 @@ export const formatDate = (dateInput) => {
 export const toInputDate = (dateInput) => {
   if (!dateInput) return '';
   const d = new Date(dateInput);
+  if (isNaN(d.getTime())) return '';
   return d.toISOString().split('T')[0];
 };
 
